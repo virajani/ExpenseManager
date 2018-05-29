@@ -45,10 +45,26 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         fragmentTransaction.add(R.id.frame_main, calling_frag_transactions);
         fragmentTransaction.add(R.id.frame_main, calling_frag_accounts);
         fragmentTransaction.add(R.id.frame_main, calling_frag_categories);
-        fragmentTransaction.hide(calling_frag_accounts);
-        fragmentTransaction.hide(calling_frag_categories);
-        fragmentTransaction.commit();
 
+        int init_fragment = getIntent().getIntExtra("OpenFragment", 1);
+
+        switch(init_fragment){
+            case 1: fragmentTransaction.hide(calling_frag_accounts);
+                    fragmentTransaction.hide(calling_frag_categories);
+                    fragmentTransaction.commit();
+                    tabLayout.getTabAt(0).select();
+                    break;
+            case 2: fragmentTransaction.hide(calling_frag_transactions);
+                    fragmentTransaction.hide(calling_frag_accounts);
+                    fragmentTransaction.commit();
+                    tabLayout.getTabAt(1).select();
+                    break;
+            case 3: fragmentTransaction.hide(calling_frag_transactions);
+                    fragmentTransaction.hide(calling_frag_categories);
+                    fragmentTransaction.commit();
+                    tabLayout.getTabAt(2).select();
+                    break;
+        }
     }
 
 

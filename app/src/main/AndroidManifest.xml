@@ -16,14 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UIX.SettingsActivity"
+        <activity
+            android:name=".UIX.SettingsActivity"
             android:parentActivityName=".MainActivity">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.wolf.apps.expensemanager.MainActivity"
-                />
-
+                android:value="com.wolf.apps.expensemanager.MainActivity" />
+        </activity>
+        <activity android:name=".UIX.AccountHandlerActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wolf.apps.expensemanager.MainActivity" />
         </activity>
     </application>
 

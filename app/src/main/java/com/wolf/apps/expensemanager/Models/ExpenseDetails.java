@@ -8,21 +8,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 class ExpenseDetails {
-    public enum transaction_types{CASH,CREDIT,DEBIT};
 
     private int id;
     private float amount;
     private String description;
     private Date date;
-    private transaction_types tr_type;
+    private Account account;
     private ExpenseSubCategory expenseSubCategory;
 
-    public ExpenseDetails(int id, float amount, String description, transaction_types tr_type, Date date, ExpenseSubCategory expenseSubCategory){
+    public ExpenseDetails(int id, float amount, String description, Date date, ExpenseSubCategory expenseSubCategory, Account account){
         this.id = id;
         this.amount = amount;
         this.description = description;
-        this.tr_type = tr_type;
         this.date = date;
+        this.account = account;
         this.expenseSubCategory = expenseSubCategory;
     }
 
@@ -38,9 +37,6 @@ class ExpenseDetails {
         return description;
     }
 
-    public transaction_types getTr_type() {
-        return tr_type;
-    }
 
     public ExpenseSubCategory getExpenseSubCategory() {
         return expenseSubCategory;
@@ -60,16 +56,17 @@ class ExpenseDetails {
         this.description = description;
     }
 
-    public void setTr_type(transaction_types tr_type) {
-        this.tr_type = tr_type;
+    public Account getAccount() {
+        return account;
     }
+
 
     public void add(SQLiteDatabase db){
         ContentValues values = new ContentValues();
         values.put("e_details_description", this.description);
         values.put("e_details_amount", this.amount);
-        values.put("transaction_type", this.tr_type.ordinal());
         values.put("e_sub_cat_id", this.expenseSubCategory.getId());
+        values.put("ac_id", this.account.getAccount_id());
         values.put("date", date.getTime());
         db.insert("expense_details", null, values);
         db.close();
@@ -83,7 +80,6 @@ class ExpenseDetails {
         ContentValues values = new ContentValues();
         values.put("e_details_amount", this.amount);
         values.put("e_details_description", this.description);
-        values.put("transaction_type", this.tr_type.ordinal());
         db.update("expense_details", values, "e_details_id = " + this.id, null);
         db.close();
     }
@@ -93,8 +89,8 @@ class ExpenseDetails {
         Date dt = new Date();
         Cursor cursor = db.rawQuery("SELECT * FROM expense_details", null);
         while(cursor.moveToNext()){
-            dt.setTime(cursor.getLong(4));
-            expense_details.add(new ExpenseDetails(cursor.getInt(0), cursor.getFloat(1), cursor.getString(2), transaction_types.values()[cursor.getInt(3)], dt, ExpenseSubCategory.getById(cursor.getInt(5),db)));
+            dt.setTime(cursor.getLong(3));
+            expense_details.add(new ExpenseDetails(cursor.getInt(0), cursor.getFloat(1), cursor.getString(2), dt, ExpenseSubCategory.getById(cursor.getInt(4),db), Account.getById(cursor.getInt(5), db)));
         }
         db.close();
         return  expense_details;
@@ -104,8 +100,8 @@ class ExpenseDetails {
         Cursor cursor = db.rawQuery("SELECT * FROM expense_details WHERE e_details_id = " + id, null);
         Date dt = new Date();
         if(cursor.moveToFirst()){
-            dt.setTime(cursor.getLong(4));
-            return new ExpenseDetails(id , cursor.getFloat(1), cursor.getString(2), transaction_types.values()[cursor.getInt(3)], dt,  ExpenseSubCategory.getById(cursor.getInt(5),db));
+            dt.setTime(cursor.getLong(3));
+            return new ExpenseDetails(cursor.getInt(0), cursor.getFloat(1), cursor.getString(2), dt, ExpenseSubCategory.getById(cursor.getInt(4),db), Account.getById(cursor.getInt(5), db));
         }
         return null;
     }
@@ -114,8 +110,8 @@ class ExpenseDetails {
         Cursor cursor = db.rawQuery("SELECT * FROM expense_details WHERE e_details_description = '" + description + "'", null);
         Date dt = new Date();
         if(cursor.moveToFirst()){
-            dt.setTime(cursor.getLong(4));
-            return new ExpenseDetails(cursor.getInt(0) , cursor.getFloat(1), description, transaction_types.values()[cursor.getInt(3)], dt, ExpenseSubCategory.getById(cursor.getInt(5),db));
+            dt.setTime(cursor.getLong(3));
+            return new ExpenseDetails(cursor.getInt(0), cursor.getFloat(1), cursor.getString(2),dt, ExpenseSubCategory.getById(cursor.getInt(4),db), Account.getById(cursor.getInt(5), db));
         }
         return null;
     }
@@ -125,20 +121,20 @@ class ExpenseDetails {
         Date dt = new Date();
         Cursor cursor = db.rawQuery("SELECT * FROM expense_details WHERE e_sub_cat_id = " + category.getId(), null);
         while(cursor.moveToNext()){
-            dt.setTime(cursor.getLong(4));
-            expense_details.add(new ExpenseDetails(cursor.getInt(0), cursor.getFloat(1), cursor.getString(2), transaction_types.values()[cursor.getInt(3)], dt, category));
+            dt.setTime(cursor.getLong(3));
+            expense_details.add(new ExpenseDetails(cursor.getInt(0), cursor.getFloat(1), cursor.getString(2), dt, ExpenseSubCategory.getById(cursor.getInt(4),db), Account.getById(cursor.getInt(5), db)));
         }
         db.close();
         return  expense_details;
     }
 
-    public static ArrayList<ExpenseDetails> getByTransactionType(transaction_types type, SQLiteDatabase db){
+    public static ArrayList<ExpenseDetails> getByAccountType(Account account, SQLiteDatabase db){
         ArrayList<ExpenseDetails>  expense_details = new ArrayList<ExpenseDetails>();
         Date dt = new Date();
-        Cursor cursor = db.rawQuery("SELECT * FROM expense_details WHERE transatcion_type = " +  type.ordinal(), null);
+        Cursor cursor = db.rawQuery("SELECT * FROM expense_details WHERE ac_id = " +  account.getAccount_id(), null);
         while(cursor.moveToNext()){
-            dt.setTime(cursor.getLong(4));
-            expense_details.add(new ExpenseDetails(cursor.getInt(0), cursor.getFloat(1), cursor.getString(2), type, dt,  ExpenseSubCategory.getById(cursor.getInt(5),db)));
+            dt.setTime(cursor.getLong(3));
+            expense_details.add(new ExpenseDetails(cursor.getInt(0), cursor.getFloat(1), cursor.getString(2), dt, ExpenseSubCategory.getById(cursor.getInt(4),db), Account.getById(cursor.getInt(5), db)));
         }
         db.close();
         return  expense_details;
