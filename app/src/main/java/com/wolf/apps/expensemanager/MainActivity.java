@@ -1,0 +1,102 @@
+package com.wolf.apps.expensemanager;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.wolf.apps.expensemanager.UIX.SettingsActivity;
+import com.wolf.apps.expensemanager.UIX.fragment_accounts;
+import com.wolf.apps.expensemanager.UIX.fragment_categories;
+import com.wolf.apps.expensemanager.UIX.fragment_transactions;
+
+public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
+
+    fragment_transactions calling_frag_transactions;
+    fragment_accounts calling_frag_accounts;
+    fragment_categories calling_frag_categories;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar_main));
+        String title = "Expense Manager";
+        SpannableString str = new SpannableString(title);
+        str.setSpan(new ForegroundColorSpan(Color.WHITE), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        getSupportActionBar().setTitle(str);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs_main);
+        tabLayout.addOnTabSelectedListener(this);
+
+        calling_frag_transactions = new fragment_transactions();
+        calling_frag_accounts = new fragment_accounts();
+        calling_frag_categories = new fragment_categories();
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.frame_main, calling_frag_transactions);
+        fragmentTransaction.add(R.id.frame_main, calling_frag_accounts);
+        fragmentTransaction.add(R.id.frame_main, calling_frag_categories);
+        fragmentTransaction.hide(calling_frag_accounts);
+        fragmentTransaction.hide(calling_frag_categories);
+        fragmentTransaction.commit();
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.menu_item_settings){
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        switch(tab.getPosition()){
+            case 0:
+                getSupportFragmentManager().beginTransaction().show(calling_frag_transactions).commit();
+                getSupportFragmentManager().beginTransaction().hide(calling_frag_categories).commit();
+                getSupportFragmentManager().beginTransaction().hide(calling_frag_accounts).commit();
+                return;
+            case 1:
+                getSupportFragmentManager().beginTransaction().hide(calling_frag_transactions).commit();
+                getSupportFragmentManager().beginTransaction().show(calling_frag_categories).commit();
+                getSupportFragmentManager().beginTransaction().hide(calling_frag_accounts).commit();
+                return;
+            case 2:
+                getSupportFragmentManager().beginTransaction().hide(calling_frag_transactions).commit();
+                getSupportFragmentManager().beginTransaction().hide(calling_frag_categories).commit();
+                getSupportFragmentManager().beginTransaction().show(calling_frag_accounts).commit();
+                return;
+            default:
+                return;
+        }
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+}
