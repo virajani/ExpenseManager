@@ -7,37 +7,39 @@
     android:orientation="vertical">
 
     <RadioGroup
+        android:id="@+id/rbg_AccountsType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioButton5"
+            android:id="@+id/rbtn_AccountsAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="All" />
+
+        <RadioButton
+            android:id="@+id/rbtn_AccountsCash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cash" />
 
         <RadioButton
-            android:id="@+id/radioButton6"
+            android:id="@+id/rbtn_AcountsCredit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Credit" />
 
         <RadioButton
-            android:id="@+id/radioButton7"
+            android:id="@+id/rbtn_AccountsDebit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Debit" />
 
-        <RadioButton
-            android:id="@+id/radioButton8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="All" />
     </RadioGroup>
 
     <android.support.constraint.ConstraintLayout
@@ -52,6 +54,9 @@
             android:layout_marginEnd="2dp"
             android:layout_marginStart="2dp"
             android:layout_marginTop="2dp"
+            android:clipToPadding="false"
+            android:paddingBottom="80dp"
+            android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

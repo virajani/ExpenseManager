@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-class ExpenseCategory {
+public class ExpenseCategory {
     private int id;
     private String description;
 
@@ -69,5 +69,16 @@ class ExpenseCategory {
             return new ExpenseCategory(cursor.getInt(0), description);
         }
         return null;
+    }
+
+    public static int getLastID(SQLiteDatabase db){
+        int last_id = 0;
+        Cursor cursor = db.rawQuery("SELECT * FROM expense_category", null);
+        while(cursor.moveToNext()){
+            if(last_id < cursor.getInt(0)){
+                last_id = cursor.getInt(0);
+            }
+        }
+        return last_id + 1;
     }
 }
