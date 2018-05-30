@@ -14,10 +14,11 @@
         android:layout_marginTop="8dp"
         android:text="28"
         android:textColor="@color/textColorPrimary"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/txt_monthAndYear"
@@ -25,9 +26,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="05.2018"
+        android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/txt_date"
-        app:layout_constraintTop_toTopOf="@+id/txt_date" />
+        app:layout_constraintTop_toTopOf="@+id/txt_date"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/txt_dayOfWeek"
@@ -37,9 +40,11 @@
         android:background="@android:color/darker_gray"
         android:text="Monday"
         android:textColor="@color/windowBackground"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/txt_date"
         app:layout_constraintStart_toEndOf="@+id/txt_date"
-        app:layout_constraintTop_toBottomOf="@+id/txt_monthAndYear" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_monthAndYear"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/txt_amount"
@@ -62,23 +67,29 @@
         android:id="@+id/txt_category"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
         android:text="TextView"
         android:textColor="@color/textColorPrimary"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/txt_dayOfWeek"
+        app:layout_constraintEnd_toStartOf="@+id/txt_description"
         app:layout_constraintStart_toStartOf="@+id/txt_date"
         app:layout_constraintTop_toBottomOf="@+id/txt_dayOfWeek"
-        app:layout_constraintVertical_bias="0.35000002" />
+        app:layout_constraintVertical_bias="0.35000002"
+        android:layout_marginRight="8dp" />
 
     <TextView
         android:id="@+id/txt_subCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
+        android:gravity="center_vertical"
         android:text="TextView"
         android:textColor="@color/textColorPrimary"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/txt_category"
         app:layout_constraintStart_toStartOf="@+id/txt_category"
@@ -102,19 +113,17 @@
 
     <TextView
         android:id="@+id/txt_description"
-        android:layout_width="0dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:lines="2"
         android:text="TextView"
         android:textColor="@color/textColorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/txt_subCategory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.23"
-        app:layout_constraintStart_toEndOf="@+id/txt_category"
         app:layout_constraintTop_toTopOf="@+id/txt_category"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.8"
+        android:layout_marginRight="8dp" />
 
     <TextView
         android:id="@+id/textView9"

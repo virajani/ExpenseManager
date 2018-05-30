@@ -37,7 +37,23 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wolf.apps.expensemanager.MainActivity" />
         </activity>
-        <activity android:name=".UIX.IncomeCategoryHandlerActivity"></activity>
+        <activity android:name=".UIX.IncomeCategoryHandlerActivity" />
+        <activity
+            android:name=".UIX.CalendarActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/CalendarDialog">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wolf.apps.expensemanager.MainActivity" />
+        </activity>
+        <activity
+            android:name=".UIX.ActivityExpenseHandler"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wolf.apps.expensemanager.MainActivity" />
+        </activity>
+        <activity android:name=".UIX.ActivityIncomeHandler"></activity>
     </application>
 
 </manifest>

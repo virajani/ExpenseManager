@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-class ExpenseDetails {
+public class ExpenseDetails {
 
     private int id;
     private float amount;
@@ -142,5 +142,15 @@ class ExpenseDetails {
 
     public static void removeByExpenseSubCategory(ExpenseSubCategory expenseSubCategory, SQLiteDatabase db){
         db.execSQL("DELETE FROM expense_details WHERE e_sub_cat_id = " + expenseSubCategory.getId());
+    }
+
+    public static int getLastID(SQLiteDatabase db){
+        int last_id = 0;
+        Cursor cursor = db.rawQuery("SELECT * FROM expense_details", null);
+        if(cursor.moveToLast()){
+            last_id = cursor.getInt(0);
+        }
+        db.close();
+        return last_id + 1;
     }
 }

@@ -54,64 +54,45 @@
         android:layout_weight="10">
 
         <ListView
-            android:id="@+id/list_main"
+            android:id="@+id/list_TransactionsMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:footerDividersEnabled="true"
             android:headerDividersEnabled="true" />
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0">
+        android:orientation="horizontal">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_mainAddIncome"
+        <Button
+            android:id="@+id/btn_MainNewIncome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/btn_dialog" />
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_add"
+            android:drawablePadding="-20dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Income" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_mainCharts"
+        <Button
+            android:id="@+id/btn_MainStats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/btn_dialog" />
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_insert_chart"
+            android:drawablePadding="-20dp"
+            android:text="Stats" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_mainAddExpense"
+        <Button
+            android:id="@+id/btn_MainNewExpense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/btn_dialog" />
-    </android.support.constraint.ConstraintLayout>
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_add"
+            android:drawablePadding="-20dp"
+            android:text="Expense" />
+    </LinearLayout>
 
 </android.widget.LinearLayout>
