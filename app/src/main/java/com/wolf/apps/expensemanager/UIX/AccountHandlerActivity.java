@@ -8,10 +8,12 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,6 +21,8 @@ import android.widget.TextView;
 import com.wolf.apps.expensemanager.MainActivity;
 import com.wolf.apps.expensemanager.Models.Account;
 import com.wolf.apps.expensemanager.Models.ExpenseDbManager;
+import com.wolf.apps.expensemanager.Models.IncomeCategory;
+import com.wolf.apps.expensemanager.Models.IncomeSubCategory;
 import com.wolf.apps.expensemanager.R;
 
 import java.util.ArrayList;
@@ -58,14 +62,14 @@ public class AccountHandlerActivity extends AppCompatActivity implements View.On
         txt_ID = (TextView)findViewById(R.id.txt_AccountHandlerID);
         txt_Name = (TextView)findViewById(R.id.txt_AccountHandlerName);
         txt_Type = (Spinner)findViewById(R.id.txt_AccountHandlerType);
-        ArrayAdapter<String> account_types_addapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>(){
+        ArrayAdapter<String> account_types_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>(){
             {
-                add("CASH");
-                add("DEBIT");
                 add("CREDIT");
+                add("DEBIT");
+                add("CASH");
             }
         });
-        txt_Type.setAdapter(account_types_addapter);
+        txt_Type.setAdapter(account_types_adapter);
 
         txt_Balance = (TextView) findViewById(R.id.txt_AccountHandlerBalance);
         btn_Save = (Button)findViewById(R.id.btn_AccountHandlerSave);
@@ -108,8 +112,6 @@ public class AccountHandlerActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
-
-
         switch (v.getId()){
             case R.id.btn_AccountHandlerSave:
                 if(!txt_Name.getText().toString().matches("") && !txt_Balance.getText().toString().matches("") && !txt_Type.getSelectedItem().toString().matches("")){
@@ -126,7 +128,51 @@ public class AccountHandlerActivity extends AppCompatActivity implements View.On
                 return;
 
             case R.id.btn_IncreaseBalance:
+                if(mode == true){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Enter amount to decrease");
+                    final EditText input = new EditText(this);
+                    input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    builder.setView(input);
+                    builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            current_account.increaseAmount(Double.parseDouble(input.getText().toString()), db.getWritableDatabase());
+                            txt_Balance.setText(Double.toString(current_account.getAmount()));
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+                }
+                return;
             case R.id.btn_DecreaseBalance:
+                if(mode == true){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Enter amount to increase");
+                    final EditText input = new EditText(this);
+                    input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    builder.setView(input);
+                    builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            current_account.decreaseAmount(Double.parseDouble(input.getText().toString()), db.getWritableDatabase());
+                            txt_Balance.setText(Double.toString(current_account.getAmount()));
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+                }
+                return;
             case R.id.btn_AccountHandlerDelete:
                 if(mode == true){
                     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {

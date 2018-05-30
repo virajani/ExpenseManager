@@ -1,6 +1,8 @@
 package com.wolf.apps.expensemanager.UIX;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,6 +29,7 @@ import com.wolf.apps.expensemanager.Models.IncomeSubCategory;
 import com.wolf.apps.expensemanager.R;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -103,6 +106,9 @@ public class ActivityIncomeHandler extends AppCompatActivity implements View.OnC
             sub_category_adapter = new IncomeSubCategoryArrayAdapter(this, IncomeSubCategory.getByCategory(current_income_details.getIncomeSubCategory().getIncomeCategory(), db.getReadableDatabase()));
             txt_sub_category.setAdapter(sub_category_adapter);
             txt_sub_category.setSelection(sub_category_adapter.getPosition(current_income_details.getIncomeSubCategory()));
+            txt_account.setSelection(account_adapter.getPosition(current_income_details.getAccount()));
+            txt_amount.setText(Float.toString(current_income_details.getAmount()));
+            txt_description.setText(current_income_details.getDescription());
         }
 
 
@@ -113,8 +119,39 @@ public class ActivityIncomeHandler extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_TransationHandlerSave:
+                if(!txt_amount.getText().toString().matches("")){
+                    if(mode == false){
+                        new IncomeDetails(0, Float.parseFloat(txt_amount.getText().toString()), txt_description.getText().toString(), new Date(today.getTimeInMillis()), sub_category_adapter.getItem(txt_sub_category.getSelectedItemPosition()), account_adapter.getItem(txt_account.getSelectedItemPosition())).add(db.getWritableDatabase());
+                        finish();
+                        return;
+                    }
+                    current_income_details.setAmount(Float.parseFloat(txt_amount.getText().toString()));
+                    current_income_details.setDescription(txt_description.getText().toString());
+                    current_income_details.update(db.getWritableDatabase());
+                    finish();;
+                }
                 return;
             case R.id.btn_TransactionHandlerDelete:
+                if(mode == true){
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    removeCurrentTransaction();
+                                    finish();
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage("Delete this transaction? Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                            .setNegativeButton("No", dialogClickListener).show();
+                }
                 return;
             default:
                 return;

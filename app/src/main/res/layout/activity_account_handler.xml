@@ -157,6 +157,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/border_table_row_common"
                 android:ems="10"
+                android:enabled="true"
                 android:gravity="center_vertical"
                 android:inputType="textPersonName"
                 android:paddingBottom="5dp"

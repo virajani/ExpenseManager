@@ -151,8 +151,9 @@ public class ExpenseCategoryHandlerActivity extends AppCompatActivity implements
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setMessage("Delete this category? Are you sure?").setPositiveButton("Yes", dialogClickListener)
                             .setNegativeButton("No", dialogClickListener).show();
-                    return;
+
                 }
+                return;
 
             case R.id.fab_CategoryHandlerAddSubCategory:
                 if(!txt_Name.getText().toString().matches("")){
