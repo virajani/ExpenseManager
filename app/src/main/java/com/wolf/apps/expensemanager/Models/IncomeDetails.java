@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-class IncomeDetails {
+public class IncomeDetails {
 
     private int id;
     private float amount;
