@@ -164,7 +164,7 @@
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="Amount" />
+                android:text="Amount(€)" />
 
             <EditText
                 android:id="@+id/txt_TransactionHandlerAmount"
