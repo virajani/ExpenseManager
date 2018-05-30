@@ -1,19 +1,26 @@
 package com.wolf.apps.expensemanager.UIX;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.wolf.apps.expensemanager.Models.IncomeCategory;
+import com.wolf.apps.expensemanager.Models.TransactionDetails;
 import com.wolf.apps.expensemanager.R;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -24,6 +31,8 @@ public class fragment_transactions extends Fragment implements View.OnClickListe
     TextView txt_Date;
     static Calendar current_date;
     Button btn_AddExpense, btn_AddIncome, btn_Stats;
+    ListView list_transactions;
+    ArrayAdapter<TransactionDetails> transactions_adapter;
 
     public fragment_transactions() {
         // Required empty public constructor
@@ -87,5 +96,28 @@ public class fragment_transactions extends Fragment implements View.OnClickListe
                 default:
                     return;
             }
+    }
+
+    class TransactionArrayAdapter extends ArrayAdapter<TransactionDetails>{
+
+        public TransactionArrayAdapter(@NonNull Context context, @NonNull List<TransactionDetails> objects) {
+            super(context, 0, objects);
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            TransactionDetails transactionDetails = getItem(position);
+
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.transaction_holder, parent, false);
+            }
+
+            TextView txt_date, txt_month_and_year, txt_day_of_week, txt_account, txt_amount, txt_category, txt_sub_category, txt_description;
+            TextView txt_name = convertView.findViewById(R.id.txt_GeneralHolderName);
+            txt_name.setText(transactionDetails.getDescription());
+
+            return convertView;
+        }
     }
 }

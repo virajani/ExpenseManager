@@ -7,59 +7,18 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ExpenseDetails {
+public class ExpenseDetails extends TransactionDetails{
 
-    private int id;
-    private float amount;
-    private String description;
-    private Date date;
-    private Account account;
     private ExpenseSubCategory expenseSubCategory;
 
     public ExpenseDetails(int id, float amount, String description, Date date, ExpenseSubCategory expenseSubCategory, Account account){
-        this.id = id;
-        this.amount = amount;
-        this.description = description;
-        this.date = date;
-        this.account = account;
+        super(id, amount, description, date, account);
         this.expenseSubCategory = expenseSubCategory;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public float getAmount() {
-        return amount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
 
     public ExpenseSubCategory getExpenseSubCategory() {
         return expenseSubCategory;
     }
-
-    public Calendar getDate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar;
-    }
-
-    public void setAmount(float amount) {
-        this.amount = amount;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
 
     public void add(SQLiteDatabase db){
         ContentValues values = new ContentValues();

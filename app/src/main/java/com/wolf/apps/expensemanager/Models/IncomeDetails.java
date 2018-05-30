@@ -8,34 +8,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class IncomeDetails {
+public class IncomeDetails extends TransactionDetails{
 
-    private int id;
-    private float amount;
-    private String description;
-    private Date date;
     private IncomeSubCategory incomeSubCategory;
-    private Account account;
+
 
     public IncomeDetails(int id, float amount, String description, Date date, IncomeSubCategory incomeSubCategory, Account account){
-        this.id = id;
-        this.amount = amount;
-        this.description = description;
-        this.account = account;
-        this.date = date;
+        super(id, amount, description, date, account);
         this.incomeSubCategory = incomeSubCategory;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public float getAmount() {
-        return amount;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public IncomeSubCategory getIncomeSubCategory() {
@@ -48,17 +28,6 @@ public class IncomeDetails {
         return calendar;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAmount(float amount) {
-        this.amount = amount;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public void add(SQLiteDatabase db){
         ContentValues values = new ContentValues();
