@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
-class IncomeCategory {
+public class IncomeCategory {
     private int id;
     private String description;
 
@@ -30,16 +30,13 @@ class IncomeCategory {
         ContentValues values = new ContentValues();
         values.put("i_cat_description", this.description);
         db.insert("income_category", null, values);
-        values.clear();
-        values.put("i_sub_cat_description", "Unspecified");
-        values.put("i_cat_id", this.id);
-        db.insert("income_sub_category", null, values);
+        new IncomeSubCategory(0, "General", this).add(db);
         db.close();
     }
 
     public void remove(SQLiteDatabase db){
+        IncomeSubCategory.removeByIncomeCategory(this, db);
         db.execSQL("DELETE FROM income_category WHERE i_cat_id = " + this.id);
-        db.execSQL("DELETE FROM income_sub_category WHERE i_cat_id = " + this.id);
     }
 
     public void update(SQLiteDatabase db){
@@ -73,5 +70,15 @@ class IncomeCategory {
             return new IncomeCategory(cursor.getInt(0), description);
         }
         return null;
+    }
+
+    public static int getLastID(SQLiteDatabase db){
+        int last_id = 0;
+        Cursor cursor = db.rawQuery("SELECT * FROM income_category", null);
+        if(cursor.moveToLast()){
+            last_id = cursor.getInt(0);
+        }
+        db.close();
+        return last_id + 1;
     }
 }

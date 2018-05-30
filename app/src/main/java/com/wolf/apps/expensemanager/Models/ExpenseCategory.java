@@ -31,10 +31,12 @@ public class ExpenseCategory {
         ContentValues values = new ContentValues();
         values.put("e_cat_description", this.description);
         db.insert("expense_category", null, values);
+        new ExpenseSubCategory(0,"General", this).add(db);
         db.close();
     }
 
     public void remove(SQLiteDatabase db){
+        ExpenseSubCategory.removeByExpenseCategory(this, db);
         db.execSQL("DELETE FROM expense_category WHERE e_cat_id = " + this.id);
     }
 
@@ -74,11 +76,10 @@ public class ExpenseCategory {
     public static int getLastID(SQLiteDatabase db){
         int last_id = 0;
         Cursor cursor = db.rawQuery("SELECT * FROM expense_category", null);
-        while(cursor.moveToNext()){
-            if(last_id < cursor.getInt(0)){
-                last_id = cursor.getInt(0);
-            }
+        if(cursor.moveToLast()){
+            last_id = cursor.getInt(0);
         }
+        db.close();
         return last_id + 1;
     }
 }

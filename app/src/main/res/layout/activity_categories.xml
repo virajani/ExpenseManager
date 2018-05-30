@@ -8,49 +8,59 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10">
+        android:layout_height="wrap_content"
+        android:layout_weight="15">
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/fab_MainCategoriesAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="@+id/listView"
+            app:layout_constraintBottom_toBottomOf="@+id/list_CategoriesMain"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/btn_dialog"
+            android:src="@drawable/ic_add"
             android:layout_marginRight="8dp" />
 
         <ListView
-            android:id="@+id/listView"
+            android:id="@+id/list_CategoriesMain"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="2dp"
             android:layout_marginEnd="2dp"
             android:layout_marginStart="2dp"
             android:layout_marginTop="2dp"
+            android:clipToPadding="false"
+            android:paddingBottom="70dp"
+            android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.design.widget.TabLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp">
 
-        <android.support.design.widget.TabItem
+        <Button
+            android:id="@+id/btn_CategoriesExpense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Expense" />
 
-        <android.support.design.widget.TabItem
+        <Button
+            android:id="@+id/btn_CategoriesIncome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Income" />
+    </LinearLayout>
 
-    </android.support.design.widget.TabLayout>
 </android.widget.LinearLayout>

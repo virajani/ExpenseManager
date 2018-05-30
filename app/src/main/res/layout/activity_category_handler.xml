@@ -7,15 +7,15 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_CategoryHolderAddSubCategory"
+        android:id="@+id/fab_CategoryHandlerAddSubCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
         android:layout_marginEnd="24dp"
         android:clickable="true"
+        android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_add"
         android:layout_marginRight="24dp" />
 
     <android.support.v7.widget.Toolbar
@@ -120,13 +120,13 @@
         android:clipToPadding="false"
         android:paddingBottom="80dp"
         android:paddingTop="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_CategoryHolderDelete"
+        app:layout_constraintBottom_toTopOf="@+id/btn_CategoryHandlerDelete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_CategoryHandlerSave" />
 
     <Button
-        android:id="@+id/btn_CategoryHolderDelete"
+        android:id="@+id/btn_CategoryHandlerDelete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

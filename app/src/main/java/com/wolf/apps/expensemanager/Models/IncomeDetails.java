@@ -139,4 +139,8 @@ class IncomeDetails {
         return  income_details;
     }
 
+    public static void removeByIncomeSubCategory(IncomeSubCategory incomeSubCategory, SQLiteDatabase db){
+        db.execSQL("DELETE FROM income_details WHERE i_sub_cat_id = " + incomeSubCategory.getId());
+    }
+
 }

@@ -112,13 +112,10 @@ public class Account {
     {
         int last_id = 0;
         Cursor cursor = db.rawQuery("SELECT * FROM transaction_account", null);
-        while(cursor.moveToNext()){
-            if(cursor.getInt(0) > last_id){
-                last_id = cursor.getInt(0);
-            }
+        while(cursor.moveToLast()){
+            last_id = cursor.getInt(0);
         }
         db.close();
-
         return last_id + 1;
     }
 

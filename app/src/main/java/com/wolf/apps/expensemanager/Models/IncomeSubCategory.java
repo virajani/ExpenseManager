@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-class IncomeSubCategory {
+public class IncomeSubCategory {
     private int id;
     private String description;
     private IncomeCategory incomeCategory;
@@ -42,6 +42,7 @@ class IncomeSubCategory {
     }
 
     public void remove(SQLiteDatabase db){
+        db.execSQL("DELETE FROM income_details WHERE i_sub_cat_id = " + this.id);
         db.execSQL("DELETE FROM income_sub_category WHERE i_sub_cat_id = " + this.id);
     }
 
@@ -86,5 +87,14 @@ class IncomeSubCategory {
         }
         db.close();
         return  sub_categories;
+    }
+
+    public static void removeByIncomeCategory(IncomeCategory incomeCategory,  SQLiteDatabase db){
+        Cursor cursor = db.rawQuery("SELECT * FROM income_sub_category WHERE i_cat_id = " + incomeCategory.getId(), null);
+        while(cursor.moveToNext()){
+            IncomeSubCategory temp = IncomeSubCategory.getById(cursor.getInt(0), db);
+            IncomeDetails.removeByIncomeSubCategory(temp,db);
+            IncomeSubCategory.getById(cursor.getInt(0),db).remove(db);
+        }
     }
 }

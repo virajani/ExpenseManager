@@ -139,4 +139,8 @@ class ExpenseDetails {
         db.close();
         return  expense_details;
     }
+
+    public static void removeByExpenseSubCategory(ExpenseSubCategory expenseSubCategory, SQLiteDatabase db){
+        db.execSQL("DELETE FROM expense_details WHERE e_sub_cat_id = " + expenseSubCategory.getId());
+    }
 }
