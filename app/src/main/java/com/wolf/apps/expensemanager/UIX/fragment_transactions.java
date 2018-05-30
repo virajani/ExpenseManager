@@ -37,7 +37,7 @@ public class fragment_transactions extends Fragment implements View.OnClickListe
     ExpenseDbManager db;
     TextView txt_Date;
     static Calendar current_date;
-    Button btn_AddExpense, btn_AddIncome, btn_Stats;
+    Button btn_AddExpense, btn_AddIncome, btn_Stats, btn_Filter;
     ListView list_transactions;
     ArrayAdapter<TransactionDetails> transactions_adapter;
     ArrayList<TransactionDetails> transactions_array;
@@ -69,10 +69,12 @@ public class fragment_transactions extends Fragment implements View.OnClickListe
         btn_AddExpense = view.findViewById(R.id.btn_MainNewExpense);
         btn_AddIncome = view.findViewById(R.id.btn_MainNewIncome);
         btn_Stats = view.findViewById(R.id.btn_MainStats);
+        btn_Filter = view.findViewById(R.id.btn_mainFilter);
 
         btn_AddIncome.setOnClickListener(this);
         btn_AddExpense.setOnClickListener(this);
         btn_Stats.setOnClickListener(this);
+        btn_Filter.setOnClickListener(this);
 
         list_transactions = view.findViewById(R.id.list_TransactionsMain);
         arrangeList();
@@ -121,6 +123,7 @@ public class fragment_transactions extends Fragment implements View.OnClickListe
                 case R.id.btn_MainStats:
                     return;
                 case R.id.btn_mainFilter:
+                    startActivityForResult(new Intent(this.getContext(), FilterActivity.class), 1);
                     return;
                 default:
                     return;
