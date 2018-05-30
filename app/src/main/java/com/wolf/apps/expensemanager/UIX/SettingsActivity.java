@@ -40,7 +40,7 @@ public class SettingsActivity extends AppCompatActivity {
                 PopupMenu popup = new PopupMenu(SettingsActivity.this, button1);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
-                        .inflate(R.menu.poupup_menu, popup.getMenu());
+                        .inflate(R.menu.popup_menu, popup.getMenu());
 
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

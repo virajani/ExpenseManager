@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/one"
+        android:title="Rs."/>
+
+    <item
+        android:id="@+id/two"
+        android:title="$"/>
+
+    <item
+        android:id="@+id/three"
+        android:title="£"/>
+
+    <item
+        android:id="@+id/four"
+        android:title="¥"/>
+
+    <item
+        android:id="@+id/five"
+        android:title="₩"/>
+    <item
+        android:id="@+id/six"
+        android:title="€"/>
+</menu>
