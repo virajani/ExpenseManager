@@ -147,7 +147,7 @@
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="Account Balance"
+                android:text="Account Balance(€)"
                 android:textSize="14sp" />
 
             <EditText
