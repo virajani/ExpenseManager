@@ -2,6 +2,7 @@ package com.wolf.apps.expensemanager;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import com.wolf.apps.expensemanager.UIX.fragment_accounts;
 import com.wolf.apps.expensemanager.UIX.fragment_categories;
 import com.wolf.apps.expensemanager.UIX.fragment_transactions;
 
+import java.util.concurrent.TimeUnit;
+
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
 
     fragment_transactions calling_frag_transactions;
@@ -26,6 +29,12 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+
+        }
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar_main));
