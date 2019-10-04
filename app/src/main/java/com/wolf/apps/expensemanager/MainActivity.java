@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         fragmentTransaction.add(R.id.frame_main, calling_frag_categories);
 
         int init_fragment = getIntent().getIntExtra("OpenFragment", 1);
-
+        
+        //switch statement
         switch(init_fragment){
             case 1: fragmentTransaction.hide(calling_frag_accounts);
                     fragmentTransaction.hide(calling_frag_categories);
